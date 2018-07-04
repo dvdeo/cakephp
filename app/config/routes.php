@@ -47,18 +47,25 @@ use Cake\Routing\Route\DashedRoute;
 Router::defaultRouteClass(DashedRoute::class);
 
 Router::scope('/', function (RouteBuilder $routes) {
+    Router::prefix('api', function (RouteBuilder $routes){
+        $routes->connect('/test/:arg1/:arg2', ['controller' => 'Tests', 'action' => 'index'], ['pass' => ['arg1', 'arg2']]);
+        $routes->connect('/test/detail', ['controller' => 'Tests', 'action' => 'detail']);
+    });
     /**
      * Here, we are connecting '/' (base path) to a controller called 'Pages',
      * its action called 'display', and we pass a param to select the view file
      * to use (in this case, src/Template/Pages/home.ctp)...
      */
     $routes->connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
-
+    $routes->connect('/user', ['controller' => 'Users', 'action' => 'index']);
+    $routes->connect('/user/add', ['controller' => 'Users', 'action' => 'add']);
     /**
      * ...and connect the rest of 'Pages' controller's URLs.
      */
     $routes->connect('/pages/*', ['controller' => 'Pages', 'action' => 'display']);
-
+    /** Test controller*/
+    // $routes->connect('/test/:arg1/:arg2', ['controller' => 'Tests', 'action' => 'index'], ['pass' => ['arg1', 'arg2']]);
+    // $routes->connect('/test/detail', ['controller' => 'Tests', 'action' => 'detail']);
     /**
      * Connect catchall routes for all controllers.
      *

@@ -1,0 +1,14 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+
+form{
+    margin: 0 auto;
+    max-width: 500px;
+    max-height: 500px;
+}
+button[type="submit"]{
+    position: relative;
+    left: 40%;
+}
